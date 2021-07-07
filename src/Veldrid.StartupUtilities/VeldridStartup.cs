@@ -107,6 +107,12 @@ namespace Veldrid.StartupUtilities
 #else
                     throw new VeldridException("D3D11 support has not been included in this configuration of Veldrid");
 #endif
+                case GraphicsBackend.Direct3D12:
+#if !EXCLUDE_D3D12_BACKEND
+                    return CreateDefaultD3D12GraphicsDevice(options, window);
+#else
+                    throw new VeldridException("D3D12 support has not been included in this configuration of Veldrid");
+#endif
                 case GraphicsBackend.Vulkan:
 #if !EXCLUDE_VULKAN_BACKEND
                     return CreateVulkanGraphicsDevice(options, window);
@@ -375,6 +381,24 @@ namespace Veldrid.StartupUtilities
                 options.SwapchainSrgbFormat);
 
             return GraphicsDevice.CreateD3D11(options, swapchainDesc);
+        }
+#endif
+
+
+#if !EXCLUDE_D3D12_BACKEND
+        public static GraphicsDevice CreateDefaultD3D12GraphicsDevice(
+            GraphicsDeviceOptions options,
+            Sdl2Window window)
+        {
+            SwapchainSource source = GetSwapchainSource(window);
+            SwapchainDescription swapchainDesc = new SwapchainDescription(
+                source,
+                (uint)window.Width, (uint)window.Height,
+                options.SwapchainDepthFormat,
+                options.SyncToVerticalBlank,
+                options.SwapchainSrgbFormat);
+
+            return GraphicsDevice.CreateD3D12(options, swapchainDesc);
         }
 #endif
 

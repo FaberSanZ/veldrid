@@ -266,6 +266,10 @@ namespace Veldrid.NeoDemo
                         {
                             ChangeBackend(GraphicsBackend.Direct3D11);
                         }
+                        if (ImGui.MenuItem("Direct3D 12", string.Empty, _gd.BackendType == GraphicsBackend.Direct3D12, GraphicsDevice.IsBackendSupported(GraphicsBackend.Direct3D12)))
+                        {
+                            ChangeBackend(GraphicsBackend.Direct3D12);
+                        }
                         if (ImGui.MenuItem("Metal", string.Empty, _gd.BackendType == GraphicsBackend.Metal, GraphicsDevice.IsBackendSupported(GraphicsBackend.Metal)))
                         {
                             ChangeBackend(GraphicsBackend.Metal);

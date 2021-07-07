@@ -10,6 +10,10 @@
         /// </summary>
         Direct3D11,
         /// <summary>
+        /// Direct3D 12.
+        /// </summary>
+        Direct3D12,
+        /// <summary>
         /// Vulkan.
         /// </summary>
         Vulkan,
